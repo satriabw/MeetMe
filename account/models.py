@@ -14,9 +14,6 @@ class UserProfile(models.Model):
     Description: Model Description
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    firstname = models.CharField(max_length=50, null=True)
-    lastname = models.CharField(max_length=50, null=True)
-    email = models.CharField(max_length=50, unique=True)
     sex = models.CharField(max_length=50)
     photo = models.ImageField('photo', blank=True, null=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
@@ -27,7 +24,7 @@ class UserProfile(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.firstname + ' ' + self.lastname
+        return self.user.first_name + ' ' + self.user.last_name
 
     class Meta:
         ordering = ['created_at']
@@ -38,3 +35,6 @@ class Interest(models.Model):
     """
     user = models.ForeignKey(UserProfile, null=True, related_name='interest')
     interest = models.CharField(max_length=50, null=True)
+
+    def __str__(self):
+        return self.interest
