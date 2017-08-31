@@ -12,14 +12,14 @@ class InterestSerializer(serializers.ModelSerializer):
         fields = ('id', 'user', 'interest')
 
 class UserProfileSerializer(WritableNestedModelSerializer):
-    interest = InterestSerializer(many=True, required=False)
+    interest = InterestSerializer(many=True, read_only=True)
     class Meta:
         model = UserProfile
         fields = ('id', 'user', 'sex',
                   'photo', 'phone_number', 'location_lat', 'location_lon',  'interest',
                   'birth_place', 'birth_date', 'created_at', 'updated_at',)
         depth = 3
-        read_only_fields = ('id',)
+        read_only_fields = ('id', 'interest',)
 
 
 class UserSerializer(serializers.ModelSerializer):
