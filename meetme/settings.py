@@ -82,12 +82,20 @@ DATABASES = {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # }
+    # 'default': {
+    #     'ENGINE':  'django.contrib.gis.db.backends.postgis',
+    #     'NAME': 'd97b52ge08a6ek',
+    #     'USER': 'cjwwytlkeogzey',
+    #     'PASSWORD': 'b16277eecdee55e2887d663acc13d071ec91f8456cdad51f226300cd5c8f7e1e',
+    #     'HOST': 'ec2-54-163-233-201.compute-1.amazonaws.com',
+    #     'PORT': '5432',
+    # }
     'default': {
-        'ENGINE':  'django.contrib.gis.db.backends.postgis',
-        'NAME': 'd97b52ge08a6ek',
-        'USER': 'cjwwytlkeogzey',
-        'PASSWORD': 'b16277eecdee55e2887d663acc13d071ec91f8456cdad51f226300cd5c8f7e1e',
-        'HOST': 'ec2-54-163-233-201.compute-1.amazonaws.com',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'meetme',
+        'USER': 'postgres',
+        'PASSWORD': 'asdf1234()',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 
