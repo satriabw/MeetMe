@@ -73,7 +73,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'meetme.wsgi.application'
 
+GEOS_LIBRARY_PATH = '/app/.geodjango/geos/lib/libgeos_c.so'
 
+GDAL_LIBRARY_PATH = '/app/.geodjango/gdal/lib/libgdal.so'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
