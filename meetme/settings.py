@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from dj_database_url import config
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,14 +22,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'mhv(0np=fstiu_ywam-q3c9ccali2s4dj)!l8#o!+ee(dldi6a'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# SECRET_KEY = 'mhv(0np=fstiu_ywam-q3c9ccali2s4dj)!l8#o!+ee(dldi6a'
+#
+# # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
+}
 # Application definition
 
 INSTALLED_APPS = [
@@ -75,29 +83,29 @@ WSGI_APPLICATION = 'meetme.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
-    'default': {
-        'ENGINE':  'django.contrib.gis.db.backends.postgresql',
-        'NAME': 'd826vl33rpnh26',
-        'USER': 'djwsiilvpegbnu',
-        'PASSWORD': 'e125a03870791e35ff26cd316b20fc9c8196b892902a4edc74b154cca53e75bd',
-        'HOST': 'ec2-23-21-197-175.compute-1.amazonaws.com',
-        'PORT': '5432',
-    }
-    # 'default': {
-    #     'ENGINE': 'django.contrib.gis.db.backends.postgis',
-    #     'NAME': 'meetme',
-    #     'USER': 'postgres',
-    #     'PASSWORD': 'asdf1234()',
-    #     'HOST': '127.0.0.1',
-    #     'PORT': '5432',
-    # }
-
-}
+# DATABASES = {
+#     # 'default': {
+#     #     'ENGINE': 'django.db.backends.sqlite3',
+#     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     # }
+#     'default': {
+#         'ENGINE':  'django.contrib.gis.db.backends.postgresql',
+#         'NAME': 'd826vl33rpnh26',
+#         'USER': 'djwsiilvpegbnu',
+#         'PASSWORD': 'e125a03870791e35ff26cd316b20fc9c8196b892902a4edc74b154cca53e75bd',
+#         'HOST': 'ec2-23-21-197-175.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#     }
+#     # 'default': {
+#     #     'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#     #     'NAME': 'meetme',
+#     #     'USER': 'postgres',
+#     #     'PASSWORD': 'asdf1234()',
+#     #     'HOST': '127.0.0.1',
+#     #     'PORT': '5432',
+#     # }
+#
+# }
 
 
 REST_FRAMEWORK = {
@@ -150,9 +158,18 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
+#
+# STATIC_URL = '/static/'
+# STATIC_ROOT = 'static'
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
-STATIC_ROOT = 'static'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
 #
 # import dj_database_url
 # DATABASES['default'] =  dj_database_url.config()
