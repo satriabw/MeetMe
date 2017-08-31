@@ -16,7 +16,7 @@ class UserProfileSerializer(WritableNestedModelSerializer):
     class Meta:
         model = UserProfile
         fields = ('id', 'user', 'sex',
-                  'photo', 'phone_number', 'location', 'interest',
+                  'photo', 'phone_number', 'location_lat', 'location_lon',  'interest',
                   'birth_place', 'birth_date', 'created_at', 'updated_at',)
         depth = 3
         read_only_fields = ('id',)
@@ -106,23 +106,3 @@ class LoginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=field_length('email'), required=True)
     password = serializers.CharField(max_length=field_length('password'), required=True)
 
-    def authenticate(self, email=None, password=None):
-        """ Authenticate a user based on email address as the username. """
-        try:
-            user = User.objects.get(email=email)
-            if user.check_password(password):
-                username = user.get_username()
-                return authenticate(username=username, password=password)
-        except User.DoesNotExist:
-            return None
-
-    def validate(self, attrs):
-        email = attrs['email'].lower()  # force lowercase email
-        user = self.authenticate(email=email,
-                                 password=attrs['password'])
-        if user is None:
-            raise serializers.ValidationError('Wrong email or password')
-        elif not user.is_active:
-            raise serializers.ValidationError(
-                'Can not log in as inactive user')
-        return user
