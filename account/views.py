@@ -19,13 +19,10 @@ class UserProfileList(generics.ListAPIView):
         return Response(serializer.data)
 
 
-class UserProfileDetails(generics.RetrieveDestroyAPIView):
+class UserProfileDetails(generics.RetrieveUpdateAPIView):
     model = UserProfile
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
-
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
