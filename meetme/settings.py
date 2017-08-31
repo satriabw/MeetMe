@@ -81,7 +81,7 @@ DATABASES = {
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # }
     'default': {
-        'ENGINE':  'django.contrib.gis.db.backends.postgis',
+        'ENGINE':  'django.contrib.gis.db.backends.postgresql_psycopg2',
         'NAME': 'd826vl33rpnh26',
         'USER': 'djwsiilvpegbnu',
         'PASSWORD': 'e125a03870791e35ff26cd316b20fc9c8196b892902a4edc74b154cca53e75bd',
