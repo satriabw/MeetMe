@@ -36,7 +36,7 @@ DATABASES = {
         default=config('DATABASE_URL')
     )
 }
-Application definition
+# Application definition
 
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
