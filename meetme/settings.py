@@ -21,21 +21,21 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'mhv(0np=fstiu_ywam-q3c9ccali2s4dj)!l8#o!+ee(dldi6a'
+# # SECURITY WARNING: keep the secret key used in production secret!
+# SECRET_KEY = 'mhv(0np=fstiu_ywam-q3c9ccali2s4dj)!l8#o!+ee(dldi6a'
 #
-# # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# # # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-#
-# SECRET_KEY = os.environ.get('SECRET_KEY')
-# DEBUG = config('DEBUG', default=True, cast=bool)
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default=config('DATABASE_URL')
-#     )
-# }
+
+SECRET_KEY = os.environ.get('SECRET_KEY')
+DEBUG = config('DEBUG', default=True, cast=bool)
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
+}
 # Application definition
 
 INSTALLED_APPS = [
@@ -81,8 +81,8 @@ WSGI_APPLICATION = 'meetme.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-DATABASES = {
+#
+# DATABASES = {
 #     # 'default': {
 #     #     'ENGINE': 'django.db.backends.sqlite3',
 #     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
@@ -95,16 +95,16 @@ DATABASES = {
 #         'HOST': 'ec2-23-21-197-175.compute-1.amazonaws.com',
 #         'PORT': '5432',
 #     }
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'meetme',
-        'USER': 'postgres',
-        'PASSWORD': 'asdf1234()',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-
-}
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'meetme',
+#         'USER': 'postgres',
+#         'PASSWORD': 'asdf1234()',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+#
+# }
 
 
 REST_FRAMEWORK = {
