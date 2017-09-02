@@ -20,7 +20,7 @@ class UserProfileSerializer(WritableNestedModelSerializer):
     user_interest = UserInterestSerializer(many=True, read_only=True)
     class Meta:
         model = UserProfile
-        fields = ('id', 'user', 'sex',
+        fields = ('id', 'user', 'sex', 'occupation',
                   'photo', 'phone_number', 'location_lat', 'location_lon',  'user_interest',
                   'birth_place', 'birth_date', 'created_at', 'updated_at',)
         depth = 3

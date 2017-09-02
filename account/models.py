@@ -12,7 +12,8 @@ class UserProfile(models.Model):
     Description: Model Description
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    sex = models.CharField(max_length=50)
+    sex = models.CharField(max_length=50, null=True)
+    occupation = models.CharField(max_length=250, null=True, blank=True)
     photo = models.ImageField('photo', blank=True, null=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
     location_lat = models.DecimalField(max_digits=9, decimal_places=6, null=True)
