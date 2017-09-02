@@ -32,8 +32,15 @@ class Interest(models.Model):
     """
     Description: Model Description
     """
-    user = models.ForeignKey(UserProfile, null=True, related_name='interest')
     interest = models.CharField(max_length=50, null=True)
 
     def __str__(self):
         return self.interest
+
+
+class UserInterest(models.Model):
+    """
+    Description: Model Description
+    """
+    user = models.ForeignKey(UserProfile, null=True, related_name='user_interest')
+    interest = models.ForeignKey(Interest, null=True, related_name='user_interest')

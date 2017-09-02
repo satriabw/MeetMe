@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from account.models import UserProfile, Interest
+from account.models import UserProfile, Interest, UserInterest
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth import password_validation, authenticate
 from drf_writable_nested import WritableNestedModelSerializer
@@ -9,25 +9,30 @@ from drf_writable_nested import WritableNestedModelSerializer
 class InterestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Interest
-        fields = ('id', 'user', 'interest')
+        fields = ('id', 'interest')
+
+class UserInterestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserInterest
+        fields = ('id', 'user', 'interest',)
 
 class UserProfileSerializer(WritableNestedModelSerializer):
-    interest = InterestSerializer(many=True, read_only=True)
+    user_interest = UserInterestSerializer(many=True, read_only=True)
     class Meta:
         model = UserProfile
         fields = ('id', 'user', 'sex',
-                  'photo', 'phone_number', 'location_lat', 'location_lon',  'interest',
+                  'photo', 'phone_number', 'location_lat', 'location_lon',  'user_interest',
                   'birth_place', 'birth_date', 'created_at', 'updated_at',)
         depth = 3
         read_only_fields = ('id', 'interest',)
 
 
+
 class UserSerializer(serializers.ModelSerializer):
     profile = UserProfileSerializer(many=False)
-
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'profile')
+        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'profile',)
         depth = 2
 
 
@@ -103,6 +108,28 @@ class RegisterSerializer(serializers.Serializer):
 
 
 class LoginSerializer(serializers.Serializer):
-    email = serializers.CharField(max_length=field_length('email'), required=True)
-    password = serializers.CharField(max_length=field_length('password'), required=True)
+	email = serializers.CharField(max_length=field_length('email'), required=True)
+	password = serializers.CharField(max_length=field_length('password'), required=True)
+	device_token = serializers.CharField(max_length=1000, required=True)
 
+	# def authenticate(self, email=None, password=None):
+	# 	""" Authenticate a user based on email address as the user name. """
+	# 	try:
+	# 		user = User.objects.get(email=email)
+	# 		if user.check_password(password):
+	# 			username = user.get_username()
+	# 			return authenticate(username=username, password=password)
+	# 	except User.DoesNotExist:
+	# 		return None
+    #
+	# def validate(self, attrs):
+	# 	email = attrs['email'].lower()  # force lowercase email
+	# 	user = self.authenticate(email=email,
+	# 	                         password=attrs['password'])
+	# 	if user is None:
+	# 		raise serializers.ValidationError('Wrong email or password')
+	# 	elif not user.is_active:
+	# 		raise serializers.ValidationError(
+	# 			'Can not log in as inactive user')
+	# 	return user
+    #

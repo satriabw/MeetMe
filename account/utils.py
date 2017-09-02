@@ -71,3 +71,24 @@ class AuthLogin(APIView):
             return username
         except User.DoesNotExist:
             return None
+
+# class AuthLogin(APIView):
+#     permission_classes = (AllowAny,)
+#
+#     def post(self, request, format=None):
+#         ser = LoginSerializer(data=request.data)
+#         if ser.is_valid():
+#             try:
+#                 user = User.objects.get(email=ser.validated_data)
+#                 up = UserProfile.objects.get(user_email=ser.validated_data)
+#                 up.device_token = request.data['device_token']
+#                 up.save()
+#             except User.DoesNotExist:
+#                 return Response({"detail": 'User not found.'}, status=status.HTTP_400_BAD_REQUEST)
+#             user_ser = UserSerializer(instance=user)
+#             data = {
+#                 "user": user_ser.data,
+#                 "token": jwt_encode_handler(jwt_payload_handler(user))
+#             }
+#             return Response(data)
+#         return Response(ser.errors, status=status.HTTP_401_UNAUTHORIZED)
