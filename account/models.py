@@ -2,11 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-
-
-# Create your models here.
-
-
 class UserProfile(models.Model):
     """
     Description: Model Description
@@ -45,3 +40,6 @@ class UserInterest(models.Model):
     """
     user = models.ForeignKey(UserProfile, null=True, related_name='user_interest')
     interest = models.ForeignKey(Interest, null=True, related_name='user_interest')
+
+    def __str__(self):
+        return self.user.user.first_name + " " + self.user.user.last_name + " likes " + self.interest.interest

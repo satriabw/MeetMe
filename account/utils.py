@@ -1,15 +1,13 @@
-
 import datetime
 import requests
 import json
-from urllib.request import Request, urlopen  # Python 3
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_jwt.settings import api_settings
 from django.contrib.auth import login, authenticate
-from .serializers import RegisterSerializer, UserSerializer, LoginSerializer
+from .serializers import RegisterSerializer, UserSerializer
 from .models import UserProfile
 from django.contrib.auth.models import User
 
@@ -104,8 +102,6 @@ class PostToUserInterest(APIView):
             return Response({
                 'data' : "error"
             },status=status.HTTP_400_BAD_REQUEST)
-
-
 # class AuthLogin(APIView):
 #     permission_classes = (AllowAny,)
 #

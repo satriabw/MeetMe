@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from account.models import UserProfile, Interest, UserInterest
 from rest_framework.validators import UniqueValidator
-from django.contrib.auth import password_validation, authenticate
+from django.contrib.auth import password_validation
 from drf_writable_nested import WritableNestedModelSerializer
 
 
