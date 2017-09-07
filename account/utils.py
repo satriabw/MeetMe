@@ -87,25 +87,25 @@ class PostToUserInterest(APIView):
         response = {}
         # change the url later
         url = 'http://127.0.0.1:8000/api/v1/account/user-interest/'
-        try:
-            for interest in interests:
-                values = {
-                    'user' : user_id,
-                    'interest' : interest
-                }
-                headers = {"content-type": "application/json", 'Authorization' : 'jwt '+token}
-                req = requests.post(url, data=json.dumps(values), headers=headers)
-                key = 'interest_'+interest
-                response[key] = req.text
-
-            return Response({
+        # try:
+        for interest in interests:
+            values = {
                 'user' : user_id,
-                'interest' : data.get('interest')
-            },status=status.HTTP_200_OK)
-        except Exception:
-            return Response({
-                'data' : "error"
-            },status=status.HTTP_400_BAD_REQUEST)
+                'interest' : interest
+            }
+            headers = {"content-type": "application/json", 'Authorization' : 'jwt '+token}
+            req = requests.post(url, data=json.dumps(values), headers=headers)
+            key = 'interest_'+interest
+            response[key] = req.text
+
+        return Response({
+            'user' : user_id,
+            'interest' : data.get('interest')
+        },status=status.HTTP_200_OK)
+        # except Exception:
+        #     return Response({
+        #         'data' : "error"
+        #     },status=status.HTTP_400_BAD_REQUEST)
 # class AuthLogin(APIView):
 #     permission_classes = (AllowAny,)
 #
