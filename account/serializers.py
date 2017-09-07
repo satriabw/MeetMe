@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from account.models import UserProfile, Interest, UserInterest
 from rest_framework.validators import UniqueValidator
-from django.contrib.auth import password_validation, authenticate
+from django.contrib.auth import password_validation
 from drf_writable_nested import WritableNestedModelSerializer
 
 
@@ -20,7 +20,7 @@ class UserProfileSerializer(WritableNestedModelSerializer):
     user_interest = UserInterestSerializer(many=True, read_only=True)
     class Meta:
         model = UserProfile
-        fields = ('id', 'user', 'sex', 'occupation',
+        fields = ('id', 'user', 'sex', 'occupation', 'device_token',
                   'photo', 'phone_number', 'location_lat', 'location_lon',  'user_interest',
                   'birth_place', 'birth_date', 'created_at', 'updated_at',)
         depth = 3
@@ -111,6 +111,7 @@ class LoginSerializer(serializers.Serializer):
 	email = serializers.CharField(max_length=field_length('email'), required=True)
 	password = serializers.CharField(max_length=field_length('password'), required=True)
 	device_token = serializers.CharField(max_length=1000, required=True)
+
 
 	# def authenticate(self, email=None, password=None):
 	# 	""" Authenticate a user based on email address as the user name. """

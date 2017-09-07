@@ -1,15 +1,13 @@
-
 import datetime
 import requests
 import json
-from urllib.request import Request, urlopen  # Python 3
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_jwt.settings import api_settings
 from django.contrib.auth import login, authenticate
-from .serializers import RegisterSerializer, UserSerializer, LoginSerializer
+from .serializers import RegisterSerializer, UserSerializer
 from .models import UserProfile
 from django.contrib.auth.models import User
 
@@ -27,8 +25,11 @@ class AuthRegister(APIView):
             user_profile = UserProfile(user=user)
             user_profile.created_at = datetime.datetime.now()
             user_profile.save()
+            user_prof = UserProfile.objects.get(user=user)
+
             data = {
                 "user": account.data,
+                'user_profile_id' : user_prof.id,
                 "token": jwt_encode_handler(jwt_payload_handler(user))
             }
             return Response(data)
@@ -98,14 +99,13 @@ class PostToUserInterest(APIView):
                 response[key] = req.text
 
             return Response({
-                'data' : response
+                'user' : user_id,
+                'interest' : data.get('interest')
             },status=status.HTTP_200_OK)
         except Exception:
             return Response({
                 'data' : "error"
             },status=status.HTTP_400_BAD_REQUEST)
-
-
 # class AuthLogin(APIView):
 #     permission_classes = (AllowAny,)
 #
