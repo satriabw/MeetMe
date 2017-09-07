@@ -13,7 +13,7 @@ from django.contrib.auth.models import User
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
-
+BASE_URL = 'https://meetme-gemastik.herokuapp.com/api/v1/account/user-interest/'
 class AuthRegister(APIView):
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
@@ -86,7 +86,8 @@ class PostToUserInterest(APIView):
         token = data.get('token', None)
         response = {}
         # change the url later
-        url = 'http://127.0.0.1:8000/api/v1/account/user-interest/'
+        # url = 'http://127.0.0.1:8000/api/v1/account/user-interest/'
+        url = BASE_URL
         # try:
         for interest in interests:
             values = {
