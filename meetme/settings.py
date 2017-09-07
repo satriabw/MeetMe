@@ -30,7 +30,7 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ['*']
 # #
-# SECRET_KEY = os.environ.get('SECRET_KEY')
+#SECRET_KEY = os.environ.get('SECRET_KEY')
 # DEBUG = config('DEBUG', default=True, cast=bool)
 # DATABASES = {
 #     'default': dj_database_url.config(
@@ -41,6 +41,7 @@ DEBUG = True
 
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
+    'messaging.apps.MessagingConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -100,7 +101,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'meetme',
         'USER': 'postgres',
-        'PASSWORD': 'asdf1234()',
+        'PASSWORD': 'root',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
