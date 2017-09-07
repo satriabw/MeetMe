@@ -8,6 +8,7 @@ class UserProfile(models.Model):
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     sex = models.CharField(max_length=50, null=True)
+    device_token  = models.CharField(max_length=250, null=True, default="")
     occupation = models.CharField(max_length=250, null=True, blank=True)
     photo = models.ImageField('photo', blank=True, null=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
@@ -42,4 +43,4 @@ class UserInterest(models.Model):
     interest = models.ForeignKey(Interest, null=True, related_name='user_interest')
 
     def __str__(self):
-        return self.user.user.first_name + " " + self.user.user.last_name + " likes " + self.interest.interest
+        return self.user.user.first_name + " " + self.user.user.last_name + ":" + self.interest.interest

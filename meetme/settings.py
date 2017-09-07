@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 #
-# # SECURITY WARNING: keep the secret key used in production secret!
+# SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'mhv(0np=fstiu_ywam-q3c9ccali2s4dj)!l8#o!+ee(dldi6a'
 #
 # # # SECURITY WARNING: don't run with debug turned on in production!
@@ -42,6 +42,7 @@ DATABASES = {
 
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
+    'matchmaking.apps.MatchmakingConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -144,9 +145,9 @@ PASSWORD_HASHERS = [
     ]
 
 JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(minutes=30),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=30),
     'JWT_ALLOW_REFRESH': True,
-    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(minutes=60),
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=60),
 }
 
 # Internationalization

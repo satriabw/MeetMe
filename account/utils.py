@@ -25,8 +25,11 @@ class AuthRegister(APIView):
             user_profile = UserProfile(user=user)
             user_profile.created_at = datetime.datetime.now()
             user_profile.save()
+            user_prof = UserProfile.objects.get(user=user)
+
             data = {
                 "user": account.data,
+                'user_profile_id' : user_prof.id,
                 "token": jwt_encode_handler(jwt_payload_handler(user))
             }
             return Response(data)
@@ -96,7 +99,8 @@ class PostToUserInterest(APIView):
                 response[key] = req.text
 
             return Response({
-                'data' : response
+                'user' : user_id,
+                'interest' : data.get('interest')
             },status=status.HTTP_200_OK)
         except Exception:
             return Response({
