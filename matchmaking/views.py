@@ -9,5 +9,5 @@ from .serializers import *
 class InterestMatrixList(generics.ListCreateAPIView):
     model = InterestMatrix
     queryset = InterestMatrix.objects.all()
-    serializer_class = InterestMatrixSerializer
+    serializer_class = GETInterestMatrixSerializer
     permission_classes = (AllowAny,)

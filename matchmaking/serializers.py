@@ -14,6 +14,12 @@ class InterestMatrixSerializer(serializers.ModelSerializer):
         fields = ('weight',)
 
 
+class GETInterestMatrixSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InterestMatrix
+        fields = ('id', 'interest', 'interest_pair','weight',)
+
+
 class MatchmakingInterestSerializer(serializers.ModelSerializer):
     # interest_matrix = InterestMatrixSerializer(many=True, read_only=True)
     class Meta:
