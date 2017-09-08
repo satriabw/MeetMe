@@ -8,4 +8,4 @@ class InterestMatrix(models.Model):
     weight = models.DecimalField(null=True, max_digits=10, decimal_places=6)
 
     def __str__(self):
-        return self.interest.interest + ":" + self.interest_pair.interest + ":" + self.weight
+        return self.interest.interest + ":" + self.interest_pair.interest + ":" + str(self.weight)

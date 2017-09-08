@@ -5,7 +5,6 @@ from rest_framework.validators import UniqueValidator
 from django.contrib.auth import password_validation
 from drf_writable_nested import WritableNestedModelSerializer
 
-
 class InterestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Interest
@@ -25,7 +24,6 @@ class UserProfileSerializer(WritableNestedModelSerializer):
                   'birth_place', 'birth_date', 'created_at', 'updated_at',)
         depth = 3
         read_only_fields = ('id', 'interest',)
-
 
 
 class UserSerializer(serializers.ModelSerializer):
