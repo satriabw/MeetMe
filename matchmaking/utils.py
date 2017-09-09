@@ -3,6 +3,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from .serializers import *
 import requests
+from django.contrib.auth import authenticate
 import json
 BASE_URL = 'https://meetme-gemastik.herokuapp.com/api/v1/account/user/%s'
 # BASE_URL = 'http://127.0.0.1:8000/api/v1/account/user/%s'
@@ -18,8 +19,8 @@ class MatchmakingEngine(APIView):
         lon = data.get('location_lon')
         token = data.get('token')
         interests = data.get('interest').split(",")
-        self.update_location(lat, lon, user_id, token)
         user_profile = UserProfile.objects.get(pk=user_id)
+        self.update_location(lat, lon, user_profile, token)
         respon = []
         for interest in interests:
             users = []
@@ -43,7 +44,10 @@ class MatchmakingEngine(APIView):
                          'location_lon': user_profile.location_lon, 'data' : respon})
 
     def update_location(self, lat, lon,user,token):
-        url = BASE_URL % user
+        user_obj = User.objects.get(pk=user.user.id)
+        user_obj = authenticate(email=user_obj.email, password=user_obj.password)
+        user_prof = UserProfile.objects.get(user=user_obj)
+        url = BASE_URL % user_prof.id
         values = {
             'location_lat' : float(lat),
             'location_lon' : float(lon),
