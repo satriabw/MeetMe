@@ -45,7 +45,7 @@ class MatchmakingEngine(APIView):
 
     def update_location(self, lat, lon,user,token):
         user_obj = User.objects.get(pk=user.user.id)
-        user_obj = authenticate(email=user_obj.email, password=user_obj.password)
+        user_obj = authenticate(username=user_obj.username, password=user_obj.password)
         user_prof = UserProfile.objects.get(user=user_obj)
         url = BASE_URL % user_prof.id
         values = {
