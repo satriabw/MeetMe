@@ -1,6 +1,6 @@
 from django.db import models
 from account.models import *
-# Create your models here.
+
 
 class InterestMatrix(models.Model):
     interest = models.ForeignKey(Interest, null=True, related_name="interest_matrix")

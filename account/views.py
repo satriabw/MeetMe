@@ -4,7 +4,7 @@ from .permissions import *
 from rest_framework import generics
 from account.models import UserProfile, Interest, UserInterest
 from account.serializers import UserProfileSerializer, InterestSerializer, UserInterestSerializer
-# Create your views here.
+
 
 class UserProfileList(generics.ListAPIView):
     model = UserProfile
@@ -23,6 +23,7 @@ class UserInterests(generics.ListCreateAPIView):
     queryset = UserInterest.objects.all()
     serializer_class = UserInterestSerializer
     permission_classes = (IsAuthenticated,)
+
 
 class UserInterestDetails(generics.RetrieveDestroyAPIView):
     model = UserInterest
@@ -50,11 +51,13 @@ class UserProfileDetails(generics.RetrieveUpdateAPIView):
         serializer = UserProfileSerializer(instance)
         return Response(serializer.data)
 
+
 class Interests(generics.ListCreateAPIView):
     model = Interest
     queryset = Interest.objects.all()
     serializer_class = InterestSerializer
     permission_classes = (IsAuthenticated,)
+
 
 class InterestDetails(generics.RetrieveDestroyAPIView):
     model = Interest
@@ -69,4 +72,3 @@ class InterestDetails(generics.RetrieveDestroyAPIView):
         instance = self.get_object()
         serializer = InterestSerializer(instance)
         return Response(serializer.data)
-

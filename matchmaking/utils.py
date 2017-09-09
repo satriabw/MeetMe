@@ -4,12 +4,12 @@ from rest_framework.response import Response
 from .serializers import *
 import requests
 import json
-# BASE_URL = 'https://meetme-gemastik.herokuapp.com/api/v1/account/user/'
+# BASE_URL = 'https://meetme-gemastik.herokuapp.com/api/v1/account/user/%s'
 BASE_URL = 'http://127.0.0.1:8000/api/v1/account/user/%s'
 
 
 class MatchmakingEngine(APIView):
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request, format=None):
         data = request.data
@@ -42,10 +42,8 @@ class MatchmakingEngine(APIView):
         return Response({'user': user_profile.id, 'location_lat': user_profile.location_lat,
                          'location_lon': user_profile.location_lon, 'data' : respon})
 
-
     def update_location(self, lat, lon,user,token):
         url = BASE_URL % user
-        print(url)
         values = {
             'location_lat' : float(lat),
             'location_lon' : float(lon),
@@ -54,4 +52,3 @@ class MatchmakingEngine(APIView):
         url = url.rstrip()
         headers = {"content-type": "application/json", 'Authorization': 'jwt ' + token}
         res = requests.put(url, data=json.dumps(values), headers=headers)
-        print(res.text)

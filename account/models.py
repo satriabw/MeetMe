@@ -25,6 +25,7 @@ class UserProfile(models.Model):
     class Meta:
         ordering = ['created_at']
 
+
 class Interest(models.Model):
     """
     Description: Model Description

@@ -7,13 +7,14 @@ from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_jwt.settings import api_settings
 from django.contrib.auth import login, authenticate
-from .serializers import RegisterSerializer, UserSerializer
+from .serializers import RegisterSerializer, UserProfileSerializer
 from .models import UserProfile
 from django.contrib.auth.models import User
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
-BASE_URL = 'https://meetme-gemastik.herokuapp.com/api/v1/account/user-interest/'
+#BASE_URL = 'https://meetme-gemastik.herokuapp.com/api/v1/account/user-interest/'
+BASE_URL = 'http://127.0.0.1:8000/api/v1/account/user-interest/'
 
 
 class AuthRegister(APIView):
@@ -32,6 +33,7 @@ class AuthRegister(APIView):
             data = {
                 "user": account.data,
                 'user_profile_id' : user_prof.id,
+                'device_token': user_prof.device_token,
                 "token": jwt_encode_handler(jwt_payload_handler(user))
             }
             return Response(data)
@@ -57,9 +59,10 @@ class AuthLogin(APIView):
         # Generate token and add it to the response object
         if account is not None:
             login(request, account)
-            user_ser = UserSerializer(instance=account)
+            user_profile = UserProfile.objects.get(user=account)
+            user_profile_ser = UserProfileSerializer(instance=user_profile)
             return Response({
-                "user": user_ser.data,
+                "user" : user_profile_ser.data,
                 "token": jwt_encode_handler(jwt_payload_handler(account))
             }, status=status.HTTP_200_OK)
 
@@ -88,9 +91,7 @@ class PostToUserInterest(APIView):
         token = data.get('token', None)
         response = {}
         # change the url later
-        url = 'http://127.0.0.1:8000/api/v1/account/user-interest/'
-        # url = BASE_URL
-        # try:
+        url = BASE_URL
         for interest in interests:
             values = {
                 'user' : user_id,
@@ -105,27 +106,3 @@ class PostToUserInterest(APIView):
             'user' : user_id,
             'interest' : data.get('interest')
         },status=status.HTTP_200_OK)
-        # except Exception:
-        #     return Response({
-        #         'data' : "error"
-        #     },status=status.HTTP_400_BAD_REQUEST)
-# class AuthLogin(APIView):
-#     permission_classes = (AllowAny,)
-#
-#     def post(self, request, format=None):
-#         ser = LoginSerializer(data=request.data)
-#         if ser.is_valid():
-#             try:
-#                 user = User.objects.get(email=ser.validated_data)
-#                 up = UserProfile.objects.get(user_email=ser.validated_data)
-#                 up.device_token = request.data['device_token']
-#                 up.save()
-#             except User.DoesNotExist:
-#                 return Response({"detail": 'User not found.'}, status=status.HTTP_400_BAD_REQUEST)
-#             user_ser = UserSerializer(instance=user)
-#             data = {
-#                 "user": user_ser.data,
-#                 "token": jwt_encode_handler(jwt_payload_handler(user))
-#             }
-#             return Response(data)
-#         return Response(ser.errors, status=status.HTTP_401_UNAUTHORIZED)
