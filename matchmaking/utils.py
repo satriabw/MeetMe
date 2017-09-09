@@ -3,7 +3,9 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from .serializers import *
 import requests
-BASE_URL = 'https://meetme-gemastik.herokuapp.com/api/v1/account/user/'
+import json
+# BASE_URL = 'https://meetme-gemastik.herokuapp.com/api/v1/account/user/'
+BASE_URL = 'http://127.0.0.1:8000/api/v1/account/user/%s'
 
 
 class MatchmakingEngine(APIView):
@@ -16,6 +18,8 @@ class MatchmakingEngine(APIView):
         lon = data.get('location_lon')
         token = data.get('token')
         interests = data.get('interest').split(",")
+        self.update_location(lat, lon, user_id, token)
+        user_profile = UserProfile.objects.get(pk=user_id)
         respon = []
         for interest in interests:
             users = []
@@ -35,9 +39,19 @@ class MatchmakingEngine(APIView):
                 ser = MatchmakingEngineSerializer(user)
                 res = {'user' : ser.data, 'interest' : u['interest'], 'pair': u['pair'], 'weight' : u['weight']}
                 respon.append(res)
-        return Response({'data' : respon})
+        return Response({'user': user_profile.id, 'location_lat': user_profile.location_lat,
+                         'location_lon': user_profile.location_lon, 'data' : respon})
 
 
     def update_location(self, lat, lon,user,token):
-        BASE_URL = 'https://meetme-gemastik.herokuapp.com/api/v1/account/user/'
-        pass
+        url = BASE_URL % user
+        print(url)
+        values = {
+            'location_lat' : float(lat),
+            'location_lon' : float(lon),
+
+        }
+        url = url.rstrip()
+        headers = {"content-type": "application/json", 'Authorization': 'jwt ' + token}
+        res = requests.put(url, data=json.dumps(values), headers=headers)
+        print(res.text)
