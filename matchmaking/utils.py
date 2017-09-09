@@ -52,3 +52,4 @@ class MatchmakingEngine(APIView):
         url = url.rstrip()
         headers = {"content-type": "application/json", 'Authorization': 'jwt ' + token}
         res = requests.put(url, data=json.dumps(values), headers=headers)
+        print(res.text)
