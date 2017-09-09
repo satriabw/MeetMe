@@ -47,14 +47,15 @@ class MatchmakingEngine(APIView):
         user_obj = User.objects.get(pk=user.user.id)
         print(user.user.id)
         user_obj = authenticate(username=user_obj.username, password=user_obj.password)
-        user_prof = UserProfile.objects.get(user=user_obj)
-        url = BASE_URL % user_prof.id
-        values = {
-            'location_lat' : float(lat),
-            'location_lon' : float(lon),
-
-        }
-        url = url.rstrip()
-        headers = {"content-type": "application/json", 'Authorization': 'jwt ' + token}
-        res = requests.put(url, data=json.dumps(values), headers=headers)
-        print(res.text)
+        print(user_obj.id)
+        # user_prof = UserProfile.objects.get(user=user_obj)
+        # url = BASE_URL % user_prof.id
+        # values = {
+        #     'location_lat' : float(lat),
+        #     'location_lon' : float(lon),
+        #
+        # }
+        # url = url.rstrip()
+        # headers = {"content-type": "application/json", 'Authorization': 'jwt ' + token}
+        # res = requests.put(url, data=json.dumps(values), headers=headers)
+        # print(res.text)
