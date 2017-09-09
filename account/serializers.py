@@ -27,12 +27,10 @@ class UserProfileSerializer(WritableNestedModelSerializer):
         read_only_fields = ('id', 'interest',)
 
 
-
 class UserSerializer(serializers.ModelSerializer):
-    profile = UserProfileSerializer(many=False)
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'profile',)
+        fields = ('username', 'email', 'first_name', 'last_name',)
         depth = 2
 
 
@@ -105,32 +103,3 @@ class RegisterSerializer(serializers.Serializer):
         user.save()
 
         return user
-
-
-class LoginSerializer(serializers.Serializer):
-	email = serializers.CharField(max_length=field_length('email'), required=True)
-	password = serializers.CharField(max_length=field_length('password'), required=True)
-	device_token = serializers.CharField(max_length=1000, required=True)
-
-
-	# def authenticate(self, email=None, password=None):
-	# 	""" Authenticate a user based on email address as the user name. """
-	# 	try:
-	# 		user = User.objects.get(email=email)
-	# 		if user.check_password(password):
-	# 			username = user.get_username()
-	# 			return authenticate(username=username, password=password)
-	# 	except User.DoesNotExist:
-	# 		return None
-    #
-	# def validate(self, attrs):
-	# 	email = attrs['email'].lower()  # force lowercase email
-	# 	user = self.authenticate(email=email,
-	# 	                         password=attrs['password'])
-	# 	if user is None:
-	# 		raise serializers.ValidationError('Wrong email or password')
-	# 	elif not user.is_active:
-	# 		raise serializers.ValidationError(
-	# 			'Can not log in as inactive user')
-	# 	return user
-    #
