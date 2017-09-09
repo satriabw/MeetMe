@@ -13,8 +13,8 @@ from django.contrib.auth.models import User
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
-#BASE_URL = 'https://meetme-gemastik.herokuapp.com/api/v1/account/user-interest/'
-BASE_URL = 'http://127.0.0.1:8000/api/v1/account/user-interest/'
+BASE_URL = 'https://meetme-gemastik.herokuapp.com/api/v1/account/user-interest/'
+# BASE_URL = 'http://127.0.0.1:8000/api/v1/account/user-interest/'
 
 
 class AuthRegister(APIView):

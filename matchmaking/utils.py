@@ -4,8 +4,8 @@ from rest_framework.response import Response
 from .serializers import *
 import requests
 import json
-# BASE_URL = 'https://meetme-gemastik.herokuapp.com/api/v1/account/user/%s'
-BASE_URL = 'http://127.0.0.1:8000/api/v1/account/user/%s'
+BASE_URL = 'https://meetme-gemastik.herokuapp.com/api/v1/account/user/%s'
+# BASE_URL = 'http://127.0.0.1:8000/api/v1/account/user/%s'
 
 
 class MatchmakingEngine(APIView):
