@@ -18,9 +18,11 @@ from django.contrib import admin
 import rest_framework.urls
 from django.conf.urls import include
 import account.urls
+import messaging.urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/v1/account/' , include(account.urls)),
+    url(r'^api/v1/messaging', include(messaging.urls))
 ]
