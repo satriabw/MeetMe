@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from .serializers import *
+from rest_framework import status
 import requests
 import json
 BASE_URL = 'https://meetme-gemastik.herokuapp.com/api/v1/account/user/%s'
@@ -40,7 +41,7 @@ class MatchmakingEngine(APIView):
                 res = {'user' : ser.data, 'interest' : u['interest'], 'pair': u['pair'], 'weight' : u['weight']}
                 respon.append(res)
         return Response({'user': user_profile.id, 'location_lat': user_profile.location_lat,
-                         'location_lon': user_profile.location_lon, 'data' : respon})
+                         'location_lon': user_profile.location_lon, 'data' : respon}, status=status.HTTP_200_OK)
 
     def update_location(self, lat, lon,user,token):
         url = BASE_URL % user

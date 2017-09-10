@@ -52,7 +52,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #     }
 #
 # }
-
+#
 
 ALLOWED_HOSTS = ['*']
 #for heroku config
@@ -69,6 +69,7 @@ DATABASES = {
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'matchmaking.apps.MatchmakingConfig',
+    'messaging.apps.MessagingConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

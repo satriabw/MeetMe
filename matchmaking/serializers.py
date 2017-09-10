@@ -1,5 +1,3 @@
-from rest_framework import serializers
-from account.models import Interest
 from account.serializers import *
 from .models import *
 
