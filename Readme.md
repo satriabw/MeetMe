@@ -1,4 +1,4 @@
-Copyright 2017 MeetMe Team for Gemastik
+Copyright 2017 Ibam , Satria , Andre
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
