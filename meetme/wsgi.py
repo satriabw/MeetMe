@@ -20,3 +20,5 @@ from whitenoise.django import DjangoWhiteNoise
 application = get_wsgi_application()
 application = DjangoWhiteNoise(application)
 application = newrelic.agent.wsgi_application()(application)
+
+# web: gunicorn meetme.wsgi --log-file -
