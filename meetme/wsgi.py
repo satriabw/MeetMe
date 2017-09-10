@@ -8,7 +8,6 @@ https://docs.djangoproject.com/en/1.11/howto/deployment/wsgi/
 """
 
 import os
-import newrelic.agent
 
 from django.core.wsgi import get_wsgi_application
 
@@ -19,6 +18,5 @@ from whitenoise.django import DjangoWhiteNoise
 
 application = get_wsgi_application()
 application = DjangoWhiteNoise(application)
-application = newrelic.agent.wsgi_application()(application)
 
 # web: gunicorn meetme.wsgi --log-file -
