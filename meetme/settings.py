@@ -186,5 +186,5 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 # DATABASES['default'] =  dj_database_url.config()
 # DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 CRONJOBS = [
-    ('* * * * * *', 'meetme.cron.my_scheduled_job')
+    ('*/15 * * * *', 'myapp.cron.my_scheduled_job')
 ]
