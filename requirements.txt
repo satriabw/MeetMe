@@ -13,6 +13,7 @@ drf-writable-nested==0.3.0
 gunicorn==19.7.1
 idna==2.6
 Markdown==2.6.9
+newrelic==2.92.0.78
 olefile==0.44
 Pillow==4.2.1
 psycopg2==2.7.3.1
