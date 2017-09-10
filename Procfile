@@ -1,1 +1,1 @@
-web: web: newrelic-admin run-program gunicorn meetme.wsgi
+web: newrelic-admin run-program gunicorn meetme.wsgi
