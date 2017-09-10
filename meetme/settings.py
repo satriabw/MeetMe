@@ -23,46 +23,46 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 #
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'mhv(0np=fstiu_ywam-q3c9ccali2s4dj)!l8#o!+ee(dldi6a'
-
-# # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-#For LocalConfig
-DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
-    # 'default': {
-    #     'ENGINE':  'django.contrib.gis.db.backends.postgresql',
-    #     'NAME': 'd826vl33rpnh26',
-    #     'USER': 'djwsiilvpegbnu',
-    #     'PASSWORD': 'e125a03870791e35ff26cd316b20fc9c8196b892902a4edc74b154cca53e75bd',
-    #     'HOST': 'ec2-23-21-197-175.compute-1.amazonaws.com',
-    #     'PORT': '5432',
-    # }
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'meetme',
-        'USER': 'postgres',
-        'PASSWORD': 'asdf1234()',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-
-}
-
-
-# ALLOWED_HOSTS = ['*']
-# #for heroku config
-# SECRET_KEY = os.environ.get('SECRET_KEY')
-# DEBUG = config('DEBUG', default=True, cast=bool)
+# SECRET_KEY = 'mhv(0np=fstiu_ywam-q3c9ccali2s4dj)!l8#o!+ee(dldi6a'
+#
+# # # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = True
+#
+# #For LocalConfig
 # DATABASES = {
-#     'default': dj_database_url.config(
-#         default=config('DATABASE_URL')
-#     )
+#     # 'default': {
+#     #     'ENGINE': 'django.db.backends.sqlite3',
+#     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     # }
+#     # 'default': {
+#     #     'ENGINE':  'django.contrib.gis.db.backends.postgresql',
+#     #     'NAME': 'd826vl33rpnh26',
+#     #     'USER': 'djwsiilvpegbnu',
+#     #     'PASSWORD': 'e125a03870791e35ff26cd316b20fc9c8196b892902a4edc74b154cca53e75bd',
+#     #     'HOST': 'ec2-23-21-197-175.compute-1.amazonaws.com',
+#     #     'PORT': '5432',
+#     # }
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'meetme',
+#         'USER': 'postgres',
+#         'PASSWORD': 'asdf1234()',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+#
 # }
+
+
+ALLOWED_HOSTS = ['*']
+#for heroku config
+SECRET_KEY = os.environ.get('SECRET_KEY')
+DEBUG = config('DEBUG', default=True, cast=bool)
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
+}
 
 # Application definition
 
