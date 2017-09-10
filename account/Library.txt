@@ -1,0 +1,3 @@
+Django v1.11.4 BSD License https://github.com/django/django/blob/master/LICENSE
+Django Rest Framework v3.6.4 BSD License https://github.com/encode/django-rest-framework/blob/master/LICENSE.md
+Django Rest JWT Auth v1.11.0 MIT License https://github.com/GetBlimp/django-rest-framework-jwt/blob/master/LICENSE
