@@ -8,4 +8,6 @@ urlpatterns = [
         views.InterestMatrixList.as_view(), name='interest-matrix-list'),
     url(r'matchmaking-engine/$',
         MatchmakingEngine.as_view(), name='matchmaking-engine'),
+    url(r'clear-location/$',
+        ClearLocation.as_view(), name='clear-location'),
 ]

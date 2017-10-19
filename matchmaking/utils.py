@@ -54,3 +54,21 @@ class MatchmakingEngine(APIView):
         headers = {"content-type": "application/json", 'Authorization': 'jwt ' + token}
         res = requests.put(url, data=json.dumps(values), headers=headers)
         print(res.text)
+
+
+class ClearLocation(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, format=None):
+        data = request.data
+
+        try:
+            user_id = data.get('user')
+            user_profile = UserProfile.objects.get(pk=user_id)
+            user_profile.location_lon = None
+            user_profile.location_lat = None
+            user_profile.save()
+            return Response({'user': user_profile.id, 'location_lat': user_profile.location_lat,
+                             'location_lon': user_profile.location_lon}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'data' : 'err'}, status=status.HTTP_400_BAD_REQUEST)
