@@ -23,7 +23,7 @@ PyJWT==1.5.2
 python-decouple==3.1
 python-gcm==0.4
 pytz==2017.2
-requests==2.18.4
+requests==2.20.0
 rest-condition==1.0.3
 six==1.10.0
 urllib3==1.22
